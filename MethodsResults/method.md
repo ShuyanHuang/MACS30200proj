@@ -23,7 +23,7 @@ The dataset contains three tables: follower, users, and users_info. After omitti
 |            | follower      | The user's follower name |
 | users      | id            | The unique id of user  |
 |            | from_id       | The user id which the current user is following |
-|users_info  | name          | The user name           |
+| users_info  | name          | The user name           |
 |            | address       | The location/base       |
 |            | education     | The education level     |
 |            | company       | The working company     |
@@ -63,7 +63,7 @@ After preprocessing, there remains 420949 unique user ids for analysis.
 
 ### 2.1 K-Means Clustering
 
-To observe the general pattern of user groups, I first implement a unsupervised learning method, K-Means clustering. I expected to see users can be divided into at least two meaningful clusters, expert user and non-expert users.
+To observe the general pattern of user groups, I first implement a unsupervised learning method, K-Means clustering in scikit-learn package. I expected to see users can be divided into at least two meaningful clusters, expert user and non-expert users.
 
 ### 2.2 Adding Labels
 
@@ -81,7 +81,7 @@ Refernece:https://www.zhihu.com/question/31273136/answer/106466841
 
 ### 2.3 Random Forest Classification and Prediction
 
-The final part of this research is perform random forest classification using trainin
+The final part of this research is perform random forest classification using training and validation set, and predict whether a user is expert or not in the test set. The model will use the scikit-learn package.
 
 
 ## 3. Result
@@ -115,7 +115,23 @@ The account activities of users are divided into three dimensions:
 * Social connection: including *_following, followers, favorite, topic, columns_*;
 * Popularity and recognition: including *_agree, thanked_*.
 
-Every variable, expect _following_, has extremely long tails.
+As shown in the table and figure below, every variable has extremely long tails, which implies that users play really different roles in contributing to the community. Most of them are quiet, but those in minority are active.
+
+##### Table 3.1.2 Summary of account activities variables
+| Variable      | Min | Mean | Median | Max |
+| :----------:  | :-: | :--: | :----: | :-:|
+| answer        |  0  |  28  |   1    | 669118 |
+| question      |  0  |   2  |   1    | 3181 |
+| article       |  0  | 0.25 |   0    | 1344 |
+| favorite      |  0  |   5  |   2    | 239  |
+| following     |  0  |  156 |   67   | 43932 |
+| followers     |  0  |  212 |   3    | 981917 |
+| topic         |  0  |  46  |   21   | 22122 |
+| columns       |  0  |  11  |   3    | 4042 |
+| agree         |  0  |  413 |   0    | 1218509 |
+| thanked       |  0  |  90  |   0    | 304153 |
+
+![Figure 3.1](C:\Users\liaoa\Desktop\density.png "Figure 3.1")
 
 Reference:
 Richardson, J., & Swan, K. (2003). Examining social presence in online courses in relation to students' perceived learning and satisfaction.
@@ -129,7 +145,7 @@ Here is the correlation matrix figure of variables involved in this study. In ge
 * _followers_ and _agree_, _followers_ and _thanked_ are moderately correlated ($r = 0.6382, 0.6576$);
 * _sex_ and _answer_, _columns_ and _following_,  _columns_ and _topic_ are slightly correlated($r = 0.3173, 0.3848, 0.3639$).
 
-![Figure 3.1](C:\Users\liaoa\Desktop\corr.png "Figure 3.1")
+![Figure 3.2](C:\Users\liaoa\Desktop\corr.png "Figure 3.2")
 
 ### 3.3 Things to do
 
